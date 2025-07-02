@@ -6,11 +6,12 @@ Preprint: https://akandykeller.github.io/papers/Flow_Equivariant_RNNs.pdf
 ![FERNN Equivariance vs. G-RNN](media/fernn.gif)
 
 ## Dependencies
-All experiments were run with python 3.10.12, with the following dependencies:
+All experiments were run with python 3.12.3, with the following dependencies:
 ```
-torch==2.5.1+cu124
-torchvision==0.16.1+cu124
-numpy>=1.24.0
+pytorch==2.4.0
+torchvision==0.19.0
+pytorch-cuda==11.8
+numpy>=1.26.4
 matplotlib>=3.7.0
 tqdm>=4.65.0
 wandb>=0.15.0

@@ -46,6 +46,10 @@ def main():
     parser.add_argument('--evaluate_only', action='store_true', help='Only evaluate the loaded model without training')
     parser.add_argument('--num_digits', type=int, default=2, help='Number of digits to use in the dataset')
     parser.add_argument('--batches_per_eval', type=int, default=160, help='Number of batches between evaluations')
+    parser.add_argument('--wandb_entity', type=str, default=None, help='Wandb entity')
+    parser.add_argument('--wandb_project', type=str, default="FERNN", help='Wandb project')
+    parser.add_argument('--wandb_dir', type=str, default='./tmp/', help='Wandb directory')
+    parser.add_argument('--wandb_name', type=str, default=None, help='Wandb name')
 
     args = parser.parse_args()
 
@@ -59,11 +63,11 @@ def main():
     os.makedirs(args.model_save_dir, exist_ok=True)
 
     # Initialize wandb
-    wandb.init(entity="ENTITY", 
-               project="FERNN", 
-               dir='./tmp/',
+    wandb.init(entity=args.wandb_entity, 
+               project=args.wandb_project, 
+               dir=args.wandb_dir,
                config=vars(args),
-               name=f"rotating_mnist_fp_{args.model}_{args.run_name}")
+               name=args.wandb_name)
 
     assert args.input_frames < args.seq_len, "input_frames must be less than seq_len"
     pred_frames = args.seq_len - args.input_frames

@@ -46,6 +46,10 @@ def main():
     parser.add_argument('--gen_vel_n_seq', type=int, default=128, help='How many sequences to sample **per (vx,vy)** for velocitygeneralisation test')
     parser.add_argument('--run_velocity_generalization', action='store_true', help='Run velocity generalization test (default: False)')
     parser.add_argument('--grad_clip', type=float, default=1.0, help='Gradient clipping value (default: 1.0, None for no clipping)')
+    parser.add_argument('--wandb_entity', type=str, default=None, help='Wandb entity')
+    parser.add_argument('--wandb_project', type=str, default="FERNN", help='Wandb project')
+    parser.add_argument('--wandb_dir', type=str, default='./tmp/', help='Wandb directory')
+    parser.add_argument('--wandb_name', type=str, default=None, help='Wandb name')
     args = parser.parse_args()
 
     # Set seeds for reproducibility
@@ -58,11 +62,11 @@ def main():
     os.makedirs(args.model_save_dir, exist_ok=True)
 
     # Initialize wandb
-    wandb.init(entity="ENTITY", 
-               project="FERNN", 
-               dir='./tmp/',
+    wandb.init(entity=args.wandb_entity, 
+               project=args.wandb_project, 
+               dir=args.wandb_dir,
                config=vars(args),
-               name=f"moving_mnist_fp_{args.model}_{args.run_name}")
+               name=args.wandb_name)
 
     assert args.input_frames < args.seq_len, "input_frames must be less than seq_len"
     pred_frames = args.seq_len - args.input_frames
