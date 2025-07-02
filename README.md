@@ -3,7 +3,7 @@ In this repository we include the code necessary to reproduce the results from t
 
 Preprint: https://akandykeller.github.io/papers/Flow_Equivariant_RNNs.pdf
 
-![FERNN Equivariance vs. G-RNN][media/fernn.gif]
+![FERNN Equivariance vs. G-RNN](media/fernn.gif)
 
 ## Dependencies
 All experiments were run with python 3.10.12, with the following dependencies:
